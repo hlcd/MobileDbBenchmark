@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileDbBenchmark.UI.MainPageDetail"
+             Title="{Binding TestName}">
+    <StackLayout Padding="10">
+        <Label Text="{Binding Spec.Description}"/>
+        <StackLayout Orientation="Vertical" IsVisible="{Binding CanRunTest}">
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Realm" Command="{Binding RunRealmCommand}"/>
+                <Button Text="Sqlite" Command="{Binding RunSqliteCommand}"/>
+            </StackLayout>
+            
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="1" Text="Realm"/>
+                <Label Grid.Row="0" Grid.Column="2" Text="Sqlite"/>
+
+                <Label Grid.Row="1" Grid.Column="0" Text="Avg"/>
+                <Label Grid.Row="1" Grid.Column="1" Text="{Binding RealmAvg}"/>
+                <Label Grid.Row="1" Grid.Column="2" Text="{Binding SqliteAvg}"/>
+                                
+                <Label Grid.Row="2" Grid.Column="0" Text="Best"/>
+                <Label Grid.Row="2" Grid.Column="1" Text="{Binding RealmBest}"/>
+                <Label Grid.Row="2" Grid.Column="2" Text="{Binding SqliteBest}"/>
+                
+                <Label Grid.Row="3" Grid.Column="0" Text="Worse"/>
+                <Label Grid.Row="3" Grid.Column="1" Text="{Binding RealmWorst}"/>
+                <Label Grid.Row="3" Grid.Column="2" Text="{Binding SqliteWorst}"/>
+
+            </Grid>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

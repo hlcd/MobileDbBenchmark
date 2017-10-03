@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using MobileDbBenchamark.Common;
+using Xamarin.Forms;
 
 namespace MobileDbBenchmark.UI
 {
@@ -8,6 +9,8 @@ namespace MobileDbBenchmark.UI
         {
             InitializeComponent();
 
+            var storageManager = DependencyService.Get<IStorageManager>();
+            StorageManager.Instance = storageManager;
             MainPage = new MainPage();
         }
 
