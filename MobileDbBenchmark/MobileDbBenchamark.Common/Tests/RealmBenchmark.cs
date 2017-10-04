@@ -15,7 +15,7 @@ namespace MobileDbBenchamark.Common.Tests
             test(this);
             stopwatch.Stop();
             return stopwatch.Elapsed;
-        }        
+        }
 
         public abstract IDisposable OpenDB();
 
@@ -34,10 +34,16 @@ namespace MobileDbBenchamark.Common.Tests
             return index % 2 == 0 ? "https://dummyimage.com/600x400/000/00ffd5.png" : null;
         }
 
+        protected static int PublicationVersion(int index)
+        {
+            return index % 2 == 0 ? 2 : 1;
+        }
+
         public abstract int PublicationCount();
 
         public abstract int EnumeratePubblications();
 
+        public abstract int UpdatePublicationVersions();
     }
 
     public class RealmBenchmark : BenchmarkBase
@@ -74,14 +80,14 @@ namespace MobileDbBenchamark.Common.Tests
                 Id = Guid.NewGuid().ToString(),
                 CoverUrl = PublicationCoverUrl(index),
                 Title = PublicationTitle(index),
-                Version = 1
+                Version = PublicationVersion(index)
             });
         }
 
         public override int PublicationCount()
         {
             return _realm.All<Publication>().Count();
-            
+
         }
 
         public override int EnumeratePubblications()
@@ -93,6 +99,35 @@ namespace MobileDbBenchamark.Common.Tests
             }
 
             return total;
+        }
+
+        public override int UpdatePublicationVersions()
+        {
+            var total = 0;
+
+            //foreach (var publication in _realm.All<Publication>().Where(x => x.Version == 1))
+            //{
+            //    _realm.Write(() =>
+            //    {
+            //        publication.Version = 2;
+            //    });
+            //    total++;
+            //}
+
+            _realm.Write(() =>
+            {
+                foreach (var publication in _realm.All<Publication>().Where(x => x.Version == 1))
+                {
+
+                    publication.Version = 2;
+
+                    total++;
+                }
+            });
+
+            var versions = _realm.All<Publication>().Count(x => x.Version == 1);
+
+            return total + versions;
         }
     }
 }

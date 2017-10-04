@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using MobileDbBenchamark.Common.Models.Sqlite;
 using SQLite;
 
@@ -42,7 +43,7 @@ namespace MobileDbBenchamark.Common.Tests
                 Id = Guid.NewGuid().ToString(),
                 CoverUrl = PublicationCoverUrl(index),
                 Title = PublicationTitle(index),
-                Version = 1
+                Version = PublicationVersion(index)
             });
         }
 
@@ -60,6 +61,32 @@ namespace MobileDbBenchamark.Common.Tests
             }
 
             return total;
+        }
+
+        public override int UpdatePublicationVersions()
+        {
+            var total = 0;
+
+            //foreach (var publication in _connection.Table<Publication>().Where(x => x.Version == 1))
+            //{
+            //    publication.Version = 2;
+            //    //TODO update all
+            //    _connection.Update(publication);
+            //    total++;
+            //}
+            var toUpdate = new List<Publication>();
+            foreach (var publication in _connection.Table<Publication>().Where(x => x.Version == 1))
+            {
+                publication.Version = 2;                         
+                total++;
+                toUpdate.Add(publication);
+            }
+
+            _connection.UpdateAll(toUpdate, true);
+
+            var versions = _connection.Table<Publication>().Count(x => x.Version == 1);
+
+            return total + versions;
         }
     }
 }

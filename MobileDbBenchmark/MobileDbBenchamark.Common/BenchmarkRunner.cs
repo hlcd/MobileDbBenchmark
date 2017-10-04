@@ -18,7 +18,8 @@ namespace MobileDbBenchamark.Common
     {
         Insert,
         Count,
-        Select
+        Select,
+        Update
     }
 
     public class TestSpec
@@ -45,6 +46,7 @@ namespace MobileDbBenchamark.Common
                 case BenchmarkTest.Insert:
                 case BenchmarkTest.Count:
                 case BenchmarkTest.Select:
+                case BenchmarkTest.Update:
                     sb.Append("Wstawia ");
                     break;
             }
@@ -62,6 +64,11 @@ namespace MobileDbBenchamark.Common
             if (TestCase == BenchmarkTest.Select)
             {
                 sb.Append("Robi selecta na elementach.");
+            }
+
+            if (TestCase == BenchmarkTest.Update)
+            {
+                sb.Append($"Robi update na {NumberOfItems / 2} elementach.");
             }
 
             return sb.ToString();
@@ -90,6 +97,10 @@ namespace MobileDbBenchamark.Common
                     testAction = EnumeratePublications;
                     prepareDbAction = b => InsertPublications(b, spec.NumberOfItems);
                     break;
+                case BenchmarkTest.Update:
+                    testAction = UpdatePublicationVersion;
+                    prepareDbAction = b => InsertPublications(b, spec.NumberOfItems);
+                    break;
             }
 
             benchmark.DeleteDB();
@@ -116,6 +127,13 @@ namespace MobileDbBenchamark.Common
 
             return results;
         }
+
+        private void UpdatePublicationVersion(BenchmarkBase benchmark)
+        {
+            var total = benchmark.UpdatePublicationVersions();
+            Debug.WriteLine($"Total publications updated: {total}");
+        }
+
 
         private void EnumeratePublications(BenchmarkBase benchmark)
         {
