@@ -68,7 +68,7 @@ namespace MobileDbBenchmark.UI
                     new TestSpec
                     {
                     Name = "Update",
-                    NumberOfItems = 1000,
+                    NumberOfItems = 10000,
                     RemoveDbBetweenIterations = true,
                     RepeatTimes = 5,
                     TestCase = BenchmarkTest.Update

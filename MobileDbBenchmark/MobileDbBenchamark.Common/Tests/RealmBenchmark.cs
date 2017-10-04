@@ -104,26 +104,26 @@ namespace MobileDbBenchamark.Common.Tests
         public override int UpdatePublicationVersions()
         {
             var total = 0;
-
-            //foreach (var publication in _realm.All<Publication>().Where(x => x.Version == 1))
-            //{
-            //    _realm.Write(() =>
-            //    {
-            //        publication.Version = 2;
-            //    });
-            //    total++;
-            //}
-
-            _realm.Write(() =>
+            var publications = _realm.All<Publication>().Where(x => x.Version == 1).ToList();
+            foreach (var publication in _realm.All<Publication>().Where(x => x.Version == 1))
             {
-                foreach (var publication in _realm.All<Publication>().Where(x => x.Version == 1))
+                _realm.Write(() =>
                 {
-
                     publication.Version = 2;
+                });
+                total++;
+            }
 
-                    total++;
-                }
-            });
+            //_realm.Write(() =>
+            //{
+            //    foreach (var publication in publications)
+            //    {
+
+            //        publication.Version = 2;
+
+            //        total++;
+            //    }
+            //});
 
             var versions = _realm.All<Publication>().Count(x => x.Version == 1);
 
