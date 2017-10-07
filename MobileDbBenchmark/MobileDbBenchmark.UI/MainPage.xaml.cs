@@ -24,11 +24,21 @@ namespace MobileDbBenchmark.UI
             if (item == null)
                 return;
 
-            var page = (MainPageDetail)Activator.CreateInstance(item.TargetType);
-            page.Init(item.Spec);
-            
+            var page = Activator.CreateInstance(item.TargetType);
+            var targetPage = page as MainPageDetail;
 
-            Detail = new NavigationPage(page);
+            if (targetPage != null)
+            {
+                targetPage.Init(item.Spec); 
+                Detail = new NavigationPage(targetPage);
+            }
+
+            var notifications = page as NotificationsPage;
+            if (notifications != null)
+            {
+                Detail = new NavigationPage(notifications);
+            }
+            
             IsPresented = false;
 
             MasterPage.ListView.SelectedItem = null;

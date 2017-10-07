@@ -10,6 +10,12 @@ namespace MobileDbBenchamark.Common.Models
 
         string CoverUrl { get; set; }
 
+        int RemoteId { get; set; }
+
+        int Version { get; set; }
+
         bool HasCover { get; }
+
+        int DownloadPercentage { get; }
     }
 }

@@ -4,6 +4,8 @@
     {
         string Id { get; }
 
-        string Nane { get; set; }
+        string Name { get; set; }
+
+        int RemoteId { get; set; }
     }
 }

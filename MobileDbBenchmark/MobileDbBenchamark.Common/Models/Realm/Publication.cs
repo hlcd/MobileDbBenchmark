@@ -15,18 +15,33 @@ namespace MobileDbBenchamark.Common.Models.Realm
 
         public int Version { get; set; }
 
+        [Indexed]
+        public int RemoteId { get; set; }
+
         public bool HasCover => string.IsNullOrEmpty(CoverUrl) == false;
 
-        //[Backlink(nameof(PublicationCollection.Publications))]
-        //public IQueryable<PublicationCollection> Collections { get; }
+        public int DownloadPercentage { get; set; }
+
+        [Backlink(nameof(PublicationCollection.Publications))]
+        public IQueryable<PublicationCollection> Collections { get; }
     }
 
-    //public class PublicationCollection : RealmObject, IPublicationCollection
-    //{
-    //    public string Id { get; set; }
+    public class PublicationCollection : RealmObject, IPublicationCollection
+    {
+        [PrimaryKey]
+        public string Id { get; set; }
 
-    //    public string Nane { get; set; }
+        public string Name { get; set; }
 
-    //    //public IList<Publication> Publications { get; }
-    //}
+        [Indexed]
+        public int RemoteId { get; set; }
+
+        public IList<Publication> Publications { get; }
+
+        public int PublicationsCount => Publications.Count;
+
+        public string CoverUrl => Publications.FirstOrDefault(x => x.CoverUrl != null)?.CoverUrl;
+
+        public bool HasCover => CoverUrl != null;
+    }
 }

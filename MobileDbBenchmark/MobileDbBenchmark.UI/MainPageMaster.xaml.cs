@@ -64,7 +64,55 @@ namespace MobileDbBenchmark.UI
                         RemoveDbBetweenIterations = true,
                         RepeatTimes = 5,
                         TestCase = BenchmarkTest.Select
-                    }
+                    },
+                    new TestSpec
+                    {
+                        Name = "UpdateManyTransactions",
+                        NumberOfItems = 1000,
+                        RemoveDbBetweenIterations = true,
+                        RepeatTimes = 5,
+                        TestCase = BenchmarkTest.UpdateManyTransactions
+                    },
+                    new TestSpec
+                    {
+                        Name = "UpdateOneTransactions",
+                        NumberOfItems = 10000,
+                        RemoveDbBetweenIterations = true,
+                        RepeatTimes = 5,
+                        TestCase = BenchmarkTest.UpdateSingleTransaction
+                    },
+                    new TestSpec
+                    {
+                        Name = "DeleteManyTransactions",
+                        NumberOfItems = 1000,
+                        RemoveDbBetweenIterations = true,
+                        RepeatTimes = 5,
+                        TestCase = BenchmarkTest.DeleteManyTransaction
+                    },
+                    new TestSpec
+                    {
+                        Name = "DeleteAllOneTransaction",
+                        NumberOfItems = 10000,
+                        RemoveDbBetweenIterations = true,
+                        RepeatTimes = 5,
+                        TestCase = BenchmarkTest.DeleteSingleTransaction
+                    },
+                    new TestSpec
+                    {
+                        Name = "ManyToManyInsert",
+                        NumberOfItems = 10000,
+                        RemoveDbBetweenIterations = true,
+                        RepeatTimes = 5,
+                        TestCase = BenchmarkTest.ManyToManyInsert
+                    },
+                    new TestSpec
+                    {
+                        Name = "SelectCollections",
+                        NumberOfItems = 10000,
+                        RemoveDbBetweenIterations = true,
+                        RepeatTimes = 5,
+                        TestCase = BenchmarkTest.SelectCollections
+                    },
                 };
 
                 MenuItems = new ObservableCollection<MainPageMenuItem>(Specs.Zip(Enumerable.Range(0, 100), (spec, i) => new MainPageMenuItem
@@ -72,7 +120,14 @@ namespace MobileDbBenchmark.UI
                     Id = i,
                     Spec = spec,
                     Title = spec.Name
-                }));                
+                }));
+                var index = MenuItems.Count;
+                MenuItems.Add(new MainPageMenuItem
+                {
+                    Id = index,
+                    TargetType = typeof(NotificationsPage),
+                    Title = "UI"
+                });
             }
 
             #region INotifyPropertyChanged Implementation
