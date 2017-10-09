@@ -20,6 +20,8 @@ namespace MobileDbBenchamark.Common.Models.Sqlite
         public bool HasCover => string.IsNullOrEmpty(CoverUrl) == false;
 
         public int DownloadPercentage { get; set; }
+
+        public string Description { get; set; }
     }
 
     public class PublicationCollection : IPublicationCollection

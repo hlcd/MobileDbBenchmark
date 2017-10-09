@@ -69,10 +69,38 @@ namespace MobileDbBenchamark.Common.Tests
 
         public static readonly RealmConfiguration Config = new RealmConfiguration("test.realm")
         {
-#if DEBUG
-            ShouldDeleteIfMigrationNeeded = true
-#endif
+            SchemaVersion = 2,
+            MigrationCallback = MigrationCallback,
+//#if DEBUG
+//            ShouldDeleteIfMigrationNeeded = true
+//#endif
         };
+
+        private static void MigrationCallback(Migration migration, ulong oldSchemaVersion)
+        {
+            var newPublications = migration.NewRealm.All<Publication>();
+            var oldPublications = migration.OldRealm.All("Publication");
+
+            for (int i = 0; i < newPublications.Count(); i++)
+            {
+                var oldPublication = oldPublications.ElementAt(i);
+                var newPublication = newPublications.ElementAt(i);
+
+                // Migrate Person from version 0 to 1: replace FirstName and LastName with FullName
+                //if (oldSchemaVersion < 1)
+                //{
+                //    newPublication.FullName = oldPerson.FirstName + " " + oldPerson.LastName;
+                //}
+
+                // Migrate Person from version 1 to 2: replace Age with Birthday
+                if (oldSchemaVersion < 2)
+                {
+                    newPublication.SomeDescription = "Description " + oldPublication.Title; // newPublication.Title
+                    Debug.WriteLine($"update publication {newPublication}");
+
+                }
+            }
+        }
 
         public override IDisposable OpenDB()
         {
@@ -80,7 +108,7 @@ namespace MobileDbBenchamark.Common.Tests
         }
 
         public override void DeleteDB()
-        {
+        {            
             Realm.DeleteRealm(Config);
         }
 

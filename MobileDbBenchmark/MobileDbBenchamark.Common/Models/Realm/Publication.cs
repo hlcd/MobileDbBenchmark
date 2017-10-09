@@ -22,6 +22,8 @@ namespace MobileDbBenchamark.Common.Models.Realm
 
         public int DownloadPercentage { get; set; }
 
+        public string SomeDescription { get; set; }
+
         [Backlink(nameof(PublicationCollection.Publications))]
         public IQueryable<PublicationCollection> Collections { get; }
     }
