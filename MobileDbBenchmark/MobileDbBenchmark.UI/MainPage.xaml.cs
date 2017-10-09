@@ -25,8 +25,8 @@ namespace MobileDbBenchmark.UI
                 return;
 
             var page = Activator.CreateInstance(item.TargetType);
-            var targetPage = page as MainPageDetail;
 
+            var targetPage = page as MainPageDetail;
             if (targetPage != null)
             {
                 targetPage.Init(item.Spec); 

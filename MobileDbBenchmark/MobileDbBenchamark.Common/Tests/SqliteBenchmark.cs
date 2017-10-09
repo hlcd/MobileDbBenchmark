@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using MobileDbBenchamark.Common.Models.Sqlite;
 using SQLite;
 
@@ -160,7 +161,7 @@ namespace MobileDbBenchamark.Common.Tests
                 //Debug.WriteLine(
                 var links = _connection.Table<PublicationCollectionLink>()
                     .Count(x => x.CollectionId == publicationCollection.Id);
-                   // .ToDictionary(link => link.PublicationId, link => link);
+                // .ToDictionary(link => link.PublicationId, link => link);
                 //links.Count();
                 //TODO how to join SqliteNetExtensions does not work
                 //_connection.Table<Publication>()
@@ -183,6 +184,37 @@ namespace MobileDbBenchamark.Common.Tests
 
             return colletions.Count;
 
+        }
+
+        public async Task<Publication> GetPublication(int sqliteRemoteId)
+        {
+            return await Task.Run(() =>
+             {
+                 var publication = new Publication()
+                 {
+                     Id = Guid.NewGuid().ToString(),
+                     CoverUrl = PublicationCoverUrl(1),
+                     Title = PublicationTitle(1),
+                     Version = PublicationVersion(1),
+                     RemoteId = sqliteRemoteId,
+                     DownloadPercentage = 0
+                 };
+                 using (OpenDB())
+                 {
+                     _connection.Insert(publication);
+                 }
+
+                 return publication;
+             });
+        }
+
+        public void UpdatePublication(string id, int downloadPercentage)
+        {
+            using (OpenDB())
+            {
+                var publication = _connection.Get<Publication>(id);
+                publication.DownloadPercentage = downloadPercentage;
+            }
         }
     }
 }

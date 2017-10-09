@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using MobileDbBenchamark.Common.Models.Realm;
 using Realms;
 
@@ -66,7 +67,7 @@ namespace MobileDbBenchamark.Common.Tests
 
         private Realm _realm;
 
-        private readonly RealmConfiguration _config = new RealmConfiguration("test.realm")
+        public static readonly RealmConfiguration Config = new RealmConfiguration("test.realm")
         {
 #if DEBUG
             ShouldDeleteIfMigrationNeeded = true
@@ -75,12 +76,12 @@ namespace MobileDbBenchamark.Common.Tests
 
         public override IDisposable OpenDB()
         {
-            return _realm = Realm.GetInstance(_config);
+            return _realm = Realm.GetInstance(Config);
         }
 
         public override void DeleteDB()
         {
-            Realm.DeleteRealm(_config);
+            Realm.DeleteRealm(Config);
         }
 
 
@@ -97,7 +98,8 @@ namespace MobileDbBenchamark.Common.Tests
                 CoverUrl = PublicationCoverUrl(index),
                 Title = PublicationTitle(index),
                 Version = PublicationVersion(index),
-                RemoteId = index
+                RemoteId = index,
+                DownloadPercentage = 0
             });
         }
 
@@ -113,7 +115,7 @@ namespace MobileDbBenchamark.Common.Tests
             _realm.Add(collection);
 
             var lowerBound = (index * itemsInCollection) % publicationsCount;
-            var upperBound = lowerBound + itemsInCollection;//((index + 1) * itemsInCollection) % publicationsCount;
+            var upperBound = lowerBound + itemsInCollection; //((index + 1) * itemsInCollection) % publicationsCount;
 
             var publications = _realm.All<Publication>()
                 .Where(x => x.RemoteId >= lowerBound && x.RemoteId < upperBound)
@@ -202,11 +204,11 @@ namespace MobileDbBenchamark.Common.Tests
         {
             var colletions = _realm.All<PublicationCollection>()
                 .ToList().Select(x => new
-                 {
-                     Name = x.Name,
-                     Count = x.PublicationsCount,
-                     CoverUrl = x.CoverUrl
-                 }).ToList();
+                {
+                    Name = x.Name,
+                    Count = x.PublicationsCount,
+                    CoverUrl = x.CoverUrl
+                }).ToList();
             //foreach (var publicationCollection in colletions)
             //{
             //    Debug.WriteLine(publicationCollection.Name);
@@ -215,6 +217,30 @@ namespace MobileDbBenchamark.Common.Tests
             //}
 
             return colletions.Count;
+        }
+
+        public async Task<Publication> GetPublication(int remoteId)
+        {
+            // return await Task.Run(() =>
+            // {
+            var realm = Realm.GetInstance(Config);
+            var id = Guid.NewGuid().ToString();
+            await realm.WriteAsync(r =>
+            {
+                r.Add(new Publication()
+                {
+                    Id = id,
+                    CoverUrl = PublicationCoverUrl(1),
+                    Title = PublicationTitle(1),
+                    Version = PublicationVersion(1),
+                    RemoteId = remoteId,
+                    DownloadPercentage = 0
+                });
+            });
+
+            return realm.Find<Publication>(id);
+            //  });
+
         }
     }
 }

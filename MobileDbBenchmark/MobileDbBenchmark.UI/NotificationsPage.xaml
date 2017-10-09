@@ -3,8 +3,36 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileDbBenchmark.UI.NotificationsPage">
     <ContentPage.Content>
-        <StackLayout>
-           <Label></Label>
+        <StackLayout Orientation="Vertical" Margin="4,0">
+            <Label Text="Realm" />
+            <StackLayout Orientation="Horizontal">
+                <Label Text="PublicationId:" />
+                <Label Text="{Binding CurrentPublicationRealm.Id, Mode=OneWay}" Margin="4,0,0,0" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Downloaded:" />
+                <Label Text="{Binding CurrentPublicationRealm.DownloadPercentage, Mode=OneWay}" Margin="4,0,0,0" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Load" Command="{Binding LoadRealmPublicationCommand}"/>
+                <Button Text="Download" Command="{Binding DownloadRealmPublicationCommand}"/>
+            </StackLayout>
+
+            <Label Text="Sqlite" />
+            <StackLayout Orientation="Horizontal">
+                <Label Text="PublicationId:" />
+                <Label Text="{Binding CurrentPublicationSqlite.Id, Mode=OneWay}" Margin="4,0,0,0" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Downloaded:" />
+                <Label Text="{Binding CurrentPublicationSqlite.DownloadPercentage, Mode=OneWay}" Margin="4,0,0,0" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Load" Command="{Binding LoadSqlitePublicationCommand}"/>
+                <Button Text="Download" Command="{Binding DownloadSqlitePublicationCommand}"/>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
