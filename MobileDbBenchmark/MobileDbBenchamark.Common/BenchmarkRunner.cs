@@ -138,7 +138,7 @@ namespace MobileDbBenchamark.Common
 
             }
 
-            //benchmark.DeleteDB();
+            benchmark.DeleteDB();
 
             var results = new List<TimeSpan>();
             for (int i = 0; i < spec.RepeatTimes; i++)
