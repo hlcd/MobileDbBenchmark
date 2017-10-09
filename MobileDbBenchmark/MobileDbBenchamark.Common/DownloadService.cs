@@ -30,6 +30,8 @@ namespace MobileDbBenchamark.Common
                     publication.DownloadPercentage = perentage;
                 });
             }
+
+            realm.Dispose();
         }
 
         public async Task DownloadSqlitePublication(string id)

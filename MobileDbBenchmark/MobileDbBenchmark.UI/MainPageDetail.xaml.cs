@@ -32,13 +32,17 @@ namespace MobileDbBenchmark.UI
         {
             private readonly IDialogService _dialogService;
             private readonly BenchmarkRunner _benchmarkRunner;
+            private IMemoryService _memoryService;
 
             public MainPageDetailViewModel()
             {
                 RunRealmCommand = new Command(async () => await RunRealmTest());
                 RunSqliteCommand = new Command(async () => await RunSqliteTest());
                 _dialogService = DependencyService.Get<IDialogService>();
+                _memoryService = DependencyService.Get<IMemoryService>();
                 _benchmarkRunner = new BenchmarkRunner();
+                UpdateMemoryInfo();
+
             }
 
             private async Task RunSqliteTest()
@@ -68,7 +72,15 @@ namespace MobileDbBenchmark.UI
 
                 DisplayResults(spec, results);
 
+                UpdateMemoryInfo();
+
                 _dialogService.HideProgressDialog();
+            }
+
+            private void UpdateMemoryInfo()
+            {
+                NetMemory = GC.GetTotalMemory(false).ToString();
+                NativeMemory = _memoryService.GetAllocatedMemory().ToString();
             }
 
             private void DisplayResults(TestSpec spec, List<TimeSpan> results)
@@ -171,11 +183,37 @@ namespace MobileDbBenchmark.UI
                 }
             }
 
+
             public bool CanRunTest => Spec != null;
 
             public ICommand RunRealmCommand { get; }
 
             public ICommand RunSqliteCommand { get; }
+
+            private string _netMemory;
+
+            public string NetMemory
+            {
+                get { return _netMemory; }
+                set
+                {
+                    _netMemory = value;
+                    OnPropertyChanged();
+                }
+            }
+
+            private string _nativeMemory;
+
+            public string NativeMemory
+            {
+                get { return _nativeMemory; }
+                set
+                {
+                    _nativeMemory = value;
+                    OnPropertyChanged();
+                }
+            }
+
 
             public void Init(TestSpec spec)
             {

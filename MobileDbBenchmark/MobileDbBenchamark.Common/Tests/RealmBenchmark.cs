@@ -265,8 +265,9 @@ namespace MobileDbBenchamark.Common.Tests
                     DownloadPercentage = 0
                 });
             });
+            var publication = realm.Find<Publication>(id);
 
-            return realm.Find<Publication>(id);
+            return publication;
             //  });
 
         }

@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="BenchmarkRunner.cs" />
     <Compile Include="DownloadService.cs" />
+    <Compile Include="IMemoryService.cs" />
     <Compile Include="Models\IPublicationCollection.cs" />
     <Compile Include="Models\IPublication.cs" />
     <Compile Include="Models\Realm\Publication.cs" />

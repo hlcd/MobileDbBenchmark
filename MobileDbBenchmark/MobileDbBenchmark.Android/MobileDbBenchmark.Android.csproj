@@ -178,6 +178,7 @@
     <Compile Include="AndroidStorageManager.cs" />
     <Compile Include="DialogService.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="MemoryService.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

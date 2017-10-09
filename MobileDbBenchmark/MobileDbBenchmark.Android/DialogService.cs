@@ -4,6 +4,7 @@ using MobileDbBenchmark.Droid;
 using MobileDbBenchmark.UI;
 
 [assembly: Xamarin.Forms.Dependency(typeof(DialogService))]
+
 namespace MobileDbBenchmark.Droid
 {
     public class DialogService : IDialogService
@@ -11,7 +12,7 @@ namespace MobileDbBenchmark.Droid
         public void ShowProgressDialog()
         {
             UserDialogs.Instance.ShowLoading("Wykonuje test");
-            
+
         }
 
         public void HideProgressDialog()

@@ -10,7 +10,7 @@
                 <Button Text="Realm" Command="{Binding RunRealmCommand}"/>
                 <Button Text="Sqlite" Command="{Binding RunSqliteCommand}"/>
             </StackLayout>
-            
+
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -29,15 +29,33 @@
                 <Label Grid.Row="1" Grid.Column="0" Text="Avg"/>
                 <Label Grid.Row="1" Grid.Column="1" Text="{Binding RealmAvg}"/>
                 <Label Grid.Row="1" Grid.Column="2" Text="{Binding SqliteAvg}"/>
-                                
+
                 <Label Grid.Row="2" Grid.Column="0" Text="Best"/>
                 <Label Grid.Row="2" Grid.Column="1" Text="{Binding RealmBest}"/>
                 <Label Grid.Row="2" Grid.Column="2" Text="{Binding SqliteBest}"/>
-                
+
                 <Label Grid.Row="3" Grid.Column="0" Text="Worse"/>
                 <Label Grid.Row="3" Grid.Column="1" Text="{Binding RealmWorst}"/>
                 <Label Grid.Row="3" Grid.Column="2" Text="{Binding SqliteWorst}"/>
 
+            </Grid>
+
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Text="Net Memory"/>
+                <Label Grid.Row="0" Grid.Column="1" Text="Native Memory"/>
+
+                <Label Grid.Row="1" Grid.Column="0" Text="{Binding NetMemory}"/>
+                <Label Grid.Row="1" Grid.Column="1" Text="{Binding NativeMemory}"/>
             </Grid>
         </StackLayout>
     </StackLayout>
