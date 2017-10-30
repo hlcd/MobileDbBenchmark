@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using MobileDbBenchmark.UI;
 using UIKit;
 
 namespace MobileDbBenchmark.iOS
