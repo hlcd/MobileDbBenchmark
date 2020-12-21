@@ -32,12 +32,11 @@ namespace MobileDbBenchmark.UI
         {
             private readonly IDialogService _dialogService;
             private readonly BenchmarkRunner _benchmarkRunner;
-            private IMemoryService _memoryService;
+            private readonly IMemoryService _memoryService;
 
             public MainPageDetailViewModel()
             {
                 RunRealmCommand = new Command(async () => await RunRealmTest());
-                RunSqliteCommand = new Command(async () => await RunSqliteTest());
                 _dialogService = DependencyService.Get<IDialogService>();
                 _memoryService = DependencyService.Get<IMemoryService>();
                 _benchmarkRunner = new BenchmarkRunner();
@@ -45,14 +44,6 @@ namespace MobileDbBenchmark.UI
 
             }
 
-            private async Task RunSqliteTest()
-            {
-                if (Spec == null)
-                    return;
-
-                Spec.DbType = DbType.Sqlite;
-                await RunSpec(Spec);
-            }
 
             private async Task RunRealmTest()
             {
@@ -65,7 +56,7 @@ namespace MobileDbBenchmark.UI
 
             private async Task RunSpec(TestSpec spec)
             {
-               
+
                 _dialogService.ShowProgressDialog();
 
                 var results = await _benchmarkRunner.RunTest(spec);
@@ -88,18 +79,10 @@ namespace MobileDbBenchmark.UI
                 var avg = results.Average(x => x.TotalMilliseconds).ToString("F");
                 var min = results.Min(x => x.TotalMilliseconds).ToString("F");
                 var max = results.Max(x => x.TotalMilliseconds).ToString("F");
-                if (spec.DbType == DbType.Sqlite)
-                {
-                    SqliteAvg = avg;
-                    SqliteBest = min;
-                    SqliteWorst = max;
-                }
-                else
-                {
-                    RealmAvg = avg;
-                    RealmBest = min;
-                    RealmWorst = max;
-                }
+                RealmAvg = avg;
+                RealmBest = min;
+                RealmWorst = max;
+
             }
 
             private string _realmWorst;
@@ -131,39 +114,6 @@ namespace MobileDbBenchmark.UI
                 set
                 {
                     _realmAvg = value;
-                    OnPropertyChanged();
-                }
-            }
-
-            private string _sqliteWorst;
-            public string SqliteWorst
-            {
-                get => _sqliteWorst;
-                set
-                {
-                    _sqliteWorst = value;
-                    OnPropertyChanged();
-                }
-            }
-
-            private string _sqliteBest;
-            public string SqliteBest
-            {
-                get => _sqliteBest;
-                set
-                {
-                    _sqliteBest = value;
-                    OnPropertyChanged();
-                }
-            }
-
-            private string _sqliteAvg;
-            public string SqliteAvg
-            {
-                get => _sqliteAvg;
-                set
-                {
-                    _sqliteAvg = value;
                     OnPropertyChanged();
                 }
             }
@@ -218,10 +168,6 @@ namespace MobileDbBenchmark.UI
             public void Init(TestSpec spec)
             {
                 Spec = spec;
-
-                SqliteAvg = string.Empty;
-                SqliteBest = string.Empty;
-                SqliteWorst = string.Empty;
                 RealmAvg = string.Empty;
                 RealmBest = string.Empty;
                 RealmWorst = string.Empty;

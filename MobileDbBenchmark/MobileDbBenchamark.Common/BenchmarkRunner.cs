@@ -9,8 +9,7 @@ namespace MobileDbBenchamark.Common
 {
     public enum DbType
     {
-        Realm,
-        Sqlite,
+        Realm
     }
 
     public enum BenchmarkTest
@@ -93,7 +92,7 @@ namespace MobileDbBenchamark.Common
 
         public async Task<List<TimeSpan>> RunTest(TestSpec spec)
         {
-            BenchmarkBase benchmark = spec.DbType == DbType.Realm ? (BenchmarkBase)new RealmBenchmark() : new SqliteBenchmark();
+            var benchmark = new RealmBenchmark();
             Action<BenchmarkBase> testAction = null;
             Action<BenchmarkBase> prepareDbAction = null;
 

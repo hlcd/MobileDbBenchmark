@@ -199,9 +199,5 @@ FakesAssemblies/
 
 #Xamarin Components
 Components/
-sln/SimpleTMS.Android/NewLegimi.Android.sln
-sln/SimpleTMS.Backend/NewLegimi.Android.sln
-sln/SimpleTMS.Desktop/NewLegimi.Android.sln
 *.apk
-src/Desktop/SimpleTMS.Desktop.Client/SimpleTMS.Desktop.Client.exe
-src/Desktop/SimpleTMS.Desktop.Client/SimpleTMS.Desktop.Client.exe.zip
+.idea/

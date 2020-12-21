@@ -14,9 +14,6 @@ namespace MobileDbBenchamark.Common
 
     public class DownloadService
     {
-        public event Action<DownloadPubblicationEventArgs> OnPublicationDownloadProgressChanged;
-
-
         public async Task DownloadRealmPublication(string id)
         {
             var realm = Realm.GetInstance(RealmBenchmark.Config);
@@ -32,24 +29,6 @@ namespace MobileDbBenchamark.Common
             }
 
             realm.Dispose();
-        }
-
-        public async Task DownloadSqlitePublication(string id)
-        {
-            var sqlite = new SqliteBenchmark();
-            for (int i = 1; i <= 100; i++)
-            {
-                var perentage = i;
-                await Task.Delay(TimeSpan.FromMilliseconds(100));
-                sqlite.UpdatePublication(id, perentage);
-
-                if (OnPublicationDownloadProgressChanged != null)
-                    OnPublicationDownloadProgressChanged(new DownloadPubblicationEventArgs
-                    {
-                        DownloadPercentage = perentage,
-                        Id = id
-                    });
-            }
         }
     }
 }
