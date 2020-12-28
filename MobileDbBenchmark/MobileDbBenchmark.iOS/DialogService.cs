@@ -9,13 +9,13 @@ namespace MobileDbBenchmark.iOS
     {
         public void ShowProgressDialog()
         {
-            UserDialogs.Instance.ShowLoading("Wykonuje test");
+            // UserDialogs.Instance.ShowLoading("Wykonuje test");
 
         }
 
         public void HideProgressDialog()
         {
-            UserDialogs.Instance.HideLoading();
+            // UserDialogs.Instance.HideLoading();
         }
     }
 }
