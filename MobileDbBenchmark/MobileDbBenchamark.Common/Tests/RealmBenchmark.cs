@@ -93,12 +93,12 @@ namespace MobileDbBenchamark.Common.Tests
                 //}
 
                 // Migrate Person from version 1 to 2: replace Age with Birthday
-                if (oldSchemaVersion < 2)
+                /*if (oldSchemaVersion < 2)
                 {
                     newPublication.SomeDescription = "Description " + oldPublication.Title; // newPublication.Title
                     Debug.WriteLine($"update publication {newPublication}");
 
-                }
+                }*/
             }
         }
 
@@ -108,7 +108,7 @@ namespace MobileDbBenchamark.Common.Tests
         }
 
         public override void DeleteDB()
-        {            
+        {
             Realm.DeleteRealm(Config);
         }
 

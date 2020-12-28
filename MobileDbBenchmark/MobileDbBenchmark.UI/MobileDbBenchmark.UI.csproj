@@ -13,7 +13,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Realm" Version="3.3.0" />
+        <PackageReference Include="Realm" Version="5.1.2" />
         <PackageReference Include="Xamarin.Forms" Version="4.8.0.1534" />
     </ItemGroup>
 
