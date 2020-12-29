@@ -146,8 +146,7 @@ namespace MobileDbBenchamark.Common.Tests
             var upperBound = lowerBound + itemsInCollection; //((index + 1) * itemsInCollection) % publicationsCount;
 
             var publications = _realm.All<Publication>()
-                .Where(x => x.RemoteId >= lowerBound && x.RemoteId < upperBound)
-                .ToList();
+                .Where(x => x.RemoteId >= lowerBound && x.RemoteId < upperBound);
 
             foreach (var publication in publications)
             {
@@ -175,7 +174,7 @@ namespace MobileDbBenchamark.Common.Tests
         public override int UpdatePublicationsInManyTransactions()
         {
             var total = 0;
-            var publications = _realm.All<Publication>().Where(x => x.Version == 1).ToList();
+            var publications = _realm.All<Publication>().Where(x => x.Version == 1);
             foreach (var publication in publications)
             {
                 _realm.Write(() =>
@@ -191,7 +190,7 @@ namespace MobileDbBenchamark.Common.Tests
         public override int UpdatePublicationsInSingleTransaction()
         {
             var total = 0;
-            var publications = _realm.All<Publication>().Where(x => x.Version == 1).ToList();
+            var publications = _realm.All<Publication>().Where(x => x.Version == 1);
             _realm.Write(() =>
             {
                 foreach (var publication in publications)
@@ -207,7 +206,7 @@ namespace MobileDbBenchamark.Common.Tests
         public override int DeletePublicationsInManyTransactions()
         {
             var total = 0;
-            var publications = _realm.All<Publication>().Where(x => x.Version == 1).ToList();
+            var publications = _realm.All<Publication>().Where(x => x.Version == 1);
             foreach (var publication in publications)
             {
                 _realm.Write(() =>
