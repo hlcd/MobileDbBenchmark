@@ -79,7 +79,7 @@ namespace MobileDbBenchamark.Common.Tests
         private static void MigrationCallback(Migration migration, ulong oldSchemaVersion)
         {
             var newPublications = migration.NewRealm.All<Publication>();
-            var oldPublications = migration.OldRealm.All("Publication");
+            var oldPublications = migration.OldRealm.DynamicApi.All("Publication");
 
             for (int i = 0; i < newPublications.Count(); i++)
             {
