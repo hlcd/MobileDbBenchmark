@@ -252,9 +252,9 @@ namespace MobileDbBenchamark.Common.Tests
             // {
             var realm = Realm.GetInstance(Config);
             var id = Guid.NewGuid().ToString();
-            await realm.WriteAsync(r =>
+            await realm.WriteAsync(() =>
             {
-                r.Add(new Publication()
+                realm.Add(new Publication()
                 {
                     Id = id,
                     CoverUrl = PublicationCoverUrl(1),
