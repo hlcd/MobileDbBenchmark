@@ -79,7 +79,7 @@ namespace MobileDbBenchamark.Common.Tests
         private static void MigrationCallback(Migration migration, ulong oldSchemaVersion)
         {
             var newPublications = migration.NewRealm.All<Publication>();
-            var oldPublications = migration.OldRealm.All("Publication");
+            var oldPublications = migration.OldRealm.DynamicApi.All("Publication");
 
             for (int i = 0; i < newPublications.Count(); i++)
             {
@@ -93,12 +93,12 @@ namespace MobileDbBenchamark.Common.Tests
                 //}
 
                 // Migrate Person from version 1 to 2: replace Age with Birthday
-                if (oldSchemaVersion < 2)
+                /*if (oldSchemaVersion < 2)
                 {
                     newPublication.SomeDescription = "Description " + oldPublication.Title; // newPublication.Title
                     Debug.WriteLine($"update publication {newPublication}");
 
-                }
+                }*/
             }
         }
 
@@ -252,9 +252,9 @@ namespace MobileDbBenchamark.Common.Tests
             // {
             var realm = Realm.GetInstance(Config);
             var id = Guid.NewGuid().ToString();
-            await realm.WriteAsync(r =>
+            await realm.WriteAsync(() =>
             {
-                r.Add(new Publication()
+                realm.Add(new Publication()
                 {
                     Id = id,
                     CoverUrl = PublicationCoverUrl(1),
