@@ -9,7 +9,14 @@
   <FlyoutPage.Detail>
     <NavigationPage>
       <x:Arguments>
-        <pages:MainPageDetail />
+        <ContentPage Title="Benchmark">
+          <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+            <Label Text="Select a benchmark from the menu"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   FontSize="18"/>
+          </StackLayout>
+        </ContentPage>
       </x:Arguments>
     </NavigationPage>
   </FlyoutPage.Detail>

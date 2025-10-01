@@ -35,11 +35,17 @@ namespace MobileDbBenchmark.UI
             public MainPageDetailViewModel()
             {
                 RunRealmCommand = new Command(async () => await RunRealmTest());
-                _dialogService = DependencyService.Get<IDialogService>();
-                _memoryService = DependencyService.Get<IMemoryService>();
+
+                // Try to get services from MAUI DI, fallback to DependencyService if needed
+#pragma warning disable CS0618
+                _dialogService = Application.Current?.Handler?.MauiContext?.Services?.GetService(typeof(IDialogService)) as IDialogService
+                    ?? DependencyService.Get<IDialogService>();
+                _memoryService = Application.Current?.Handler?.MauiContext?.Services?.GetService(typeof(IMemoryService)) as IMemoryService
+                    ?? DependencyService.Get<IMemoryService>();
+#pragma warning restore CS0618
+
                 _benchmarkRunner = new BenchmarkRunner();
                 UpdateMemoryInfo();
-
             }
 
 

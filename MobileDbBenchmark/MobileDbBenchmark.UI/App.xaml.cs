@@ -1,4 +1,5 @@
 ﻿using MobileDbBenchamark.Common;
+using Microsoft.Maui;
 using Microsoft.Maui.Controls;
 
 namespace MobileDbBenchmark.UI
@@ -8,14 +9,20 @@ namespace MobileDbBenchmark.UI
         public App()
         {
             InitializeComponent();
+        }
 
-#pragma warning disable CS0618 // Type or member is obsolete
-            // Get from DI if available, otherwise fallback to DependencyService for compatibility
-            var storageManager = Handler?.MauiContext?.Services?.GetService(typeof(IStorageManager)) as IStorageManager
-                ?? Microsoft.Maui.Controls.DependencyService.Get<IStorageManager>();
-            StorageManager.Instance = storageManager;
+        protected override Window CreateWindow(IActivationState activationState)
+        {
+            // Get IStorageManager from DI at this point when MauiContext is available
+            var storageManager = Handler?.MauiContext?.Services?.GetService(typeof(IStorageManager)) as IStorageManager;
+            if (storageManager != null)
+            {
+                StorageManager.Instance = storageManager;
+            }
+
             MainPage = new MainPage();
-#pragma warning restore CS0618 // Type or member is obsolete
+
+            return base.CreateWindow(activationState);
         }
 
         protected override void OnStart()

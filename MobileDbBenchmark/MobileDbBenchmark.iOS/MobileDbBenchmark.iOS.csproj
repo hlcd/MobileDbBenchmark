@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net9.0-ios</TargetFrameworks>
+    <TargetFramework>net9.0-ios</TargetFramework>
     <OutputType>Exe</OutputType>
     <RootNamespace>MobileDbBenchmark.iOS</RootNamespace>
     <AssemblyName>MobileDbBenchmark.iOS</AssemblyName>
@@ -15,7 +15,8 @@
     <ApplicationTitle>MobileDbBenchmark</ApplicationTitle>
     <ApplicationVersion>1</ApplicationVersion>
 
-    <!-- iOS specific - do not set SupportedOSPlatformVersion, using Info.plist instead -->
+    <!-- iOS specific -->
+    <SupportedOSPlatformVersion>15.0</SupportedOSPlatformVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
