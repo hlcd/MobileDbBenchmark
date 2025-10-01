@@ -31,7 +31,7 @@
     <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.0" />
     <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.0" />
     <PackageReference Include="Acr.UserDialogs.Maui" Version="9.2.2" />
-    <PackageReference Include="Realm" Version="10.18.0" />
+    <PackageReference Include="Realm" Version="20.1.0" />
   </ItemGroup>
 
   <ItemGroup>
