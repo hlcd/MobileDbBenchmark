@@ -7,12 +7,10 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using MobileDbBenchamark.Common;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+using Microsoft.Maui.Controls;
 
 namespace MobileDbBenchmark.UI
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPageMaster : ContentPage
     {
         public ListView ListView;

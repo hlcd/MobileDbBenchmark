@@ -1,7 +1,4 @@
-﻿using MobileDbBenchmark.Droid;
-using MobileDbBenchmark.UI;
-
-[assembly: Xamarin.Forms.Dependency(typeof(DialogService))]
+﻿using MobileDbBenchmark.UI;
 
 namespace MobileDbBenchmark.Droid
 {

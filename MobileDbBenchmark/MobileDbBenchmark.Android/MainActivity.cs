@@ -1,26 +1,13 @@
-﻿using Acr.UserDialogs;
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
-using Android.OS;
-using Xamarin.Forms;
+using Microsoft.Maui;
+using Microsoft.Maui.Controls;
 
 namespace MobileDbBenchmark.Droid
 {
-    [Activity(Label = "MobileDbBenchmark", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
+    [Activity(Theme = "@style/Maui.SplashTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize | ConfigChanges.Density)]
+    public class MainActivity : MauiAppCompatActivity
     {
-        protected override void OnCreate(Bundle bundle)
-        {
-
-            TabLayoutResource = Resource.Layout.Tabbar;
-            ToolbarResource = Resource.Layout.Toolbar;
-
-            base.OnCreate(bundle);
-
-            global::Xamarin.Forms.Forms.Init(this, bundle);
-            LoadApplication(new UI.App());
-            UserDialogs.Init(() => (Activity) Forms.Context);
-        }
     }
 }
 

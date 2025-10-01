@@ -1,9 +1,7 @@
 ﻿using System;
 using System.IO;
 using MobileDbBenchamark.Common;
-using MobileDbBenchmark.iOS;
 
-[assembly: Xamarin.Forms.Dependency(typeof(IOSStorageManager))]
 namespace MobileDbBenchmark.iOS
 {
     public class IOSStorageManager : IStorageManager

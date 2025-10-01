@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+<FlyoutPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileDbBenchmark.UI.MainPage"
              xmlns:pages="clr-namespace:MobileDbBenchmark.UI">
-  <MasterDetailPage.Master>
+  <FlyoutPage.Flyout>
     <pages:MainPageMaster x:Name="MasterPage" />
-  </MasterDetailPage.Master>
-  <MasterDetailPage.Detail>
+  </FlyoutPage.Flyout>
+  <FlyoutPage.Detail>
     <NavigationPage>
       <x:Arguments>
         <pages:MainPageDetail />
       </x:Arguments>
     </NavigationPage>
-  </MasterDetailPage.Detail>
-</MasterDetailPage>
+  </FlyoutPage.Detail>
+</FlyoutPage>

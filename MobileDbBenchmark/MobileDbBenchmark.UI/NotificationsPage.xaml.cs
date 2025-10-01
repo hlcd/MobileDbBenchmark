@@ -6,12 +6,10 @@ using System.Windows.Input;
 using MobileDbBenchamark.Common;
 using MobileDbBenchamark.Common.Models.Realm;
 using MobileDbBenchamark.Common.Tests;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+using Microsoft.Maui.Controls;
 
 namespace MobileDbBenchmark.UI
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NotificationsPage : ContentPage
     {
         private readonly NotificationPageViewModel _viewModel;

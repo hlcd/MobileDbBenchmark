@@ -1,9 +1,7 @@
 ﻿using System;
 using System.IO;
 using MobileDbBenchamark.Common;
-using MobileDbBenchmark.Droid;
 
-[assembly: Xamarin.Forms.Dependency(typeof(AndroidStorageManager))]
 namespace MobileDbBenchmark.Droid
 {
     public class AndroidStorageManager : IStorageManager

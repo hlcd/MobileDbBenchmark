@@ -1,20 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
+        <TargetFramework>net9.0</TargetFramework>
         <Configurations>Debug;Release</Configurations>
-        <LangVersion>7.3</LangVersion>
+        <LangVersion>13</LangVersion>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <WarningsAsErrors />
-        <NoWarn>1701;1702;NU1701</NoWarn>
+        <NoWarn>1701;1702;NU1701;NU1900;CS0618</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Realm" Version="10.18.0" />
-        <PackageReference Include="Xamarin.Forms" Version="4.8.0.1534" />
+        <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.0" />
+        <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.0" />
     </ItemGroup>
 
     <ItemGroup>

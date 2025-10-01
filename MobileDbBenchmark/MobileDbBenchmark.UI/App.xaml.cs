@@ -1,5 +1,5 @@
 ﻿using MobileDbBenchamark.Common;
-using Xamarin.Forms;
+using Microsoft.Maui.Controls;
 
 namespace MobileDbBenchmark.UI
 {
@@ -9,9 +9,13 @@ namespace MobileDbBenchmark.UI
         {
             InitializeComponent();
 
-            var storageManager = DependencyService.Get<IStorageManager>();
+#pragma warning disable CS0618 // Type or member is obsolete
+            // Get from DI if available, otherwise fallback to DependencyService for compatibility
+            var storageManager = Handler?.MauiContext?.Services?.GetService(typeof(IStorageManager)) as IStorageManager
+                ?? Microsoft.Maui.Controls.DependencyService.Get<IStorageManager>();
             StorageManager.Instance = storageManager;
             MainPage = new MainPage();
+#pragma warning restore CS0618 // Type or member is obsolete
         }
 
         protected override void OnStart()

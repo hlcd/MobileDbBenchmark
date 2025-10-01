@@ -1,8 +1,6 @@
 ﻿using Acr.UserDialogs;
-using MobileDbBenchmark.iOS;
 using MobileDbBenchmark.UI;
 
-[assembly: Xamarin.Forms.Dependency(typeof(DialogService))]
 namespace MobileDbBenchmark.iOS
 {
     public class DialogService : IDialogService

@@ -6,12 +6,10 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using MobileDbBenchamark.Common;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+using Microsoft.Maui.Controls;
 
 namespace MobileDbBenchmark.UI
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPageDetail : ContentPage
     {
         private readonly MainPageDetailViewModel _viewModel;
