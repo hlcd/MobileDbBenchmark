@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net9.0-android</TargetFrameworks>
+    <TargetFramework>net9.0-android</TargetFramework>
     <OutputType>Exe</OutputType>
     <RootNamespace>MobileDbBenchmark.Droid</RootNamespace>
     <AssemblyName>MobileDbBenchmark.Android</AssemblyName>
@@ -30,9 +30,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
     <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+      <RunAOTCompilation>true</RunAOTCompilation>
     <AndroidEnableProfiledAot>true</AndroidEnableProfiledAot>
     <AndroidUseDefaultAotProfile>false</AndroidUseDefaultAotProfile>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+      <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
+      <AndroidDexTool>d8</AndroidDexTool>
+      <AndroidLinkTool>r8</AndroidLinkTool>
   </PropertyGroup>
 
   <ItemGroup>
